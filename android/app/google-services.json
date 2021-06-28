@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "1050947841960",
+    "project_id": "bookmanage-b6cf6",
+    "storage_bucket": "bookmanage-b6cf6.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1050947841960:android:014b3bf743cba24feab79d",
+        "android_client_info": {
+          "package_name": "com.dieulinh.book_manager"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1050947841960-sg1h791i1q04rigpiscc70v44eui9fr1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCvwTVRxHpgI1LExYOQexnihOu5-CQiPFk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1050947841960-sg1h791i1q04rigpiscc70v44eui9fr1.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "1050947841960-1eq7q7ggcrtj5ksjvv0ee2vhpov1ur6m.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.dieulinh.bookManager"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

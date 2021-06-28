@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>1050947841960-4j5ji2h20uvk2vibb5ne6jn6738ltqds.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.1050947841960-4j5ji2h20uvk2vibb5ne6jn6738ltqds</string>
+	<key>API_KEY</key>
+	<string>AIzaSyAMJ_YccnXd8tHARcysn2KHiVq2DXSAg1U</string>
+	<key>GCM_SENDER_ID</key>
+	<string>1050947841960</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.lynkmyu.bookManager</string>
+	<key>PROJECT_ID</key>
+	<string>bookmanage-b6cf6</string>
+	<key>STORAGE_BUCKET</key>
+	<string>bookmanage-b6cf6.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:1050947841960:ios:f8a357cdc8abeac2eab79d</string>
+	<key>DATABASE_URL</key>
+	<string>https://bookmanage-b6cf6-default-rtdb.firebaseio.com</string>
+</dict>
+</plist>
