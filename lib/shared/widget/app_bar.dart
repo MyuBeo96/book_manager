@@ -1,23 +1,22 @@
 // Flutter imports:
+import 'package:book_manager/shared/util.dart';
 import 'package:flutter/material.dart';
 // Package imports:
 // Project imports:
 
 class ApplicationBar extends StatelessWidget {
-  final int numberOfSteps;
+  final List<String> listTitle;
   final int currentStep;
-  final String title;
   final double? width;
 
   const ApplicationBar({
-    this.numberOfSteps = 3,
-    this.currentStep = 1,
-    this.title = '...',
+    this.currentStep = 0,
+    required this.listTitle,
     this.width,
   });
 
   List<Widget> generateStepRow(
-    int numberOfSteps,
+    List<String> listTitle,
     int currentStep,
     double screenWidth,
   ) {
@@ -31,56 +30,100 @@ class ApplicationBar extends StatelessWidget {
         color: Color(0xFFEB0D1E),
       ),
     );
-    final currentStepDecor = BoxDecoration(
-      color: Color(0xFFFEB0D1E),
-      shape: BoxShape.circle,
-    );
+
     final remainingStepDecor = BoxDecoration(
       color: Color(0xFFF7F7FC),
       shape: BoxShape.circle,
     );
-    for (int i = 1; i <= numberOfSteps; i++) {
+    for (int i = 0; i < listTitle.length; i++) {
       BoxDecoration decoration;
       if (i < currentStep) {
         decoration = completedStepDecor;
-      } else if (i == currentStep) {
-        decoration = currentStepDecor;
       } else {
         decoration = remainingStepDecor;
       }
+
       listDesired.add(
-        Container(
-          margin: EdgeInsets.only(
-              left: i == 1 ? 0 : 8.0, right: i == numberOfSteps ? 0 : 8.0),
-          width: 24.0,
-          height: 24.0,
-          alignment: Alignment.center,
-          decoration: decoration,
-          child: Text(
-            '$i',
-            style: TextStyle(
-              fontSize: 14.0,
-              fontWeight: FontWeight.w500,
-              color: i <= currentStep ? Color(0xFFFFFFFF) : Color(0xFF8E8E93),
-            ),
+        Expanded(
+          child: Column(
+            mainAxisSize: MainAxisSize.max,
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  (i == 0)
+                      ? Container(
+                          width: ((screenWidth / listTitle.length) / 2) - 20.0,
+                        )
+                      : Container(
+                          width: ((screenWidth / listTitle.length) / 2) - 20.0,
+                          height: 1.0,
+                          decoration: BoxDecoration(
+                            color: i < currentStep
+                                ? Color(0xFFEB0D1E)
+                                : Color(0xFFE5E5EA),
+                          ),
+                        ),
+                  SizedBox(
+                    width: 8.0,
+                  ),
+                  Container(
+                    width: 24.0,
+                    height: 24.0,
+                    alignment: Alignment.center,
+                    decoration: decoration,
+                    child: Text(
+                      '${i + 1}',
+                      style: TextStyle(
+                        fontSize: 14.0,
+                        fontWeight: FontWeight.w500,
+                        color: i < currentStep
+                            ? Color(0xFFFFFFFF)
+                            : Color(0xFF8E8E93),
+                      ),
+                    ),
+                  ),
+                  SizedBox(
+                    width: 8.0,
+                  ),
+                  (i == (listTitle.length - 1))
+                      ? Container(
+                          width: ((screenWidth / listTitle.length) / 2) - 20.0,
+                        )
+                      : Container(
+                          width: ((screenWidth / listTitle.length) / 2) - 20.0,
+                          height: 1.0,
+                          decoration: BoxDecoration(
+                            color: i < (currentStep - 1)
+                                ? Color(0xFFEB0D1E)
+                                : Color(0xFFE5E5EA),
+                          ),
+                        ),
+                ],
+              ),
+              SizedBox(
+                height: 4.0,
+              ),
+              Container(
+                height: 40.0,
+                child: Text(
+                  listTitle[i],
+                  style: TextStyle(
+                    fontSize: dimen_16,
+                    fontWeight: FontWeight.w400,
+                    color: i < currentStep ? Color(0xFFEB0D1E) : Colors.black,
+                  ),
+                  textAlign: TextAlign.center,
+                  maxLines: 2,
+                ),
+              ),
+            ],
           ),
         ),
       );
-      if (i < numberOfSteps) {
-        double _couplingWidth = (screenWidth -
-                (numberOfSteps * 24.0 + 32.0) -
-                ((numberOfSteps + 3) * 8)) /
-            (numberOfSteps - 1);
-        listDesired.add(
-          Container(
-            width: _couplingWidth,
-            height: 1.0,
-            decoration: BoxDecoration(
-              color: i < currentStep ? Color(0xFFEB0D1E) : Color(0xFFE5E5EA),
-            ),
-          ),
-        );
-      }
     }
     return listDesired;
   }
@@ -88,50 +131,18 @@ class ApplicationBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     double _screenWith = width ?? MediaQuery.of(context).size.width;
-    return Column(children: [
-      Container(
-        padding: EdgeInsets.only(
-          top: 20.0,
+    return Container(
+      padding: EdgeInsets.only(
+        top: 20.0,
+      ),
+      color: Color(0x00FFFFFF),
+      child: Row(
+        children: generateStepRow(
+          listTitle,
+          currentStep,
+          _screenWith,
         ),
-        color: Color(0x00FFFFFF),
-        child: Column(
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              mainAxisSize: MainAxisSize.max,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: generateStepRow(
-                numberOfSteps,
-                currentStep,
-                _screenWith,
-              ),
-            ),
-            // Container(
-            //   width: _screenWith,
-            //   child: Stack(
-            //     alignment: AlignmentDirectional.centerEnd,
-            //     children: [
-            //       Row(children: [
-            //         Expanded(
-            //           child: Align(
-            //             alignment: Alignment.center,
-            //             child: Text(
-            //               '$title',
-            //               style: TextStyle(
-            //                 color: Colors.white,
-            //                 fontSize: 16,
-            //                 fontWeight: FontWeight.w400,
-            //               ),
-            //             ),
-            //           ),
-            //         ),
-            //       ]),
-            //     ],
-            //   ),
-            // ),
-          ],
-        ),
-      )
-    ]);
+      ),
+    );
   }
 }

@@ -145,7 +145,7 @@ class _LoginScreenState extends State<LoginScreen> {
             decoration: BoxDecoration(
               color: AppColor.backgroundColor,
             ),
-            padding: const EdgeInsets.all(dimen_32),
+            padding: const EdgeInsets.only(top: dimen_32),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
@@ -178,9 +178,13 @@ class _LoginScreenState extends State<LoginScreen> {
                 //   ),
                 // ),
                 ApplicationBar(
-                  currentStep: 2,
-                  width: 400,
-                  title: '',
+                  currentStep: 4,
+                  listTitle: [
+                    "Thông tin cá nhân",
+                    "Xác nhận thông tin",
+                    "Thông tin tài chính",
+                    "Hoàn thành",
+                  ],
                 ),
                 VietlottRadioListTile(
                   scrollDirection: Axis.horizontal,
