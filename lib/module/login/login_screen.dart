@@ -145,9 +145,11 @@ class _LoginScreenState extends State<LoginScreen> {
             decoration: BoxDecoration(
               color: AppColor.backgroundColor,
             ),
-            padding: const EdgeInsets.only(top: dimen_32),
+            // padding: const EdgeInsets.all(dimen_50),
+            padding: const EdgeInsets.only(top: dimen_50),
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 // CountDown(
                 //   duration: Duration(
@@ -178,10 +180,11 @@ class _LoginScreenState extends State<LoginScreen> {
                 //   ),
                 // ),
                 ApplicationBar(
-                  currentStep: 4,
+                  // width: 300,
+                  currentStep: 2,
                   listTitle: [
                     "Thông tin cá nhân",
-                    "Xác nhận thông tin",
+                    "Xác nhận ",
                     "Thông tin tài chính",
                     "Hoàn thành",
                   ],
@@ -207,6 +210,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     print('linhhhhhh ' + value.toString());
                   },
                 ),
+
                 // StreamBuilder(
                 //     stream: valueStream,
                 //     builder: (BuildContext context,
@@ -424,7 +428,7 @@ class _LoginScreenState extends State<LoginScreen> {
       text: 'LOGIN',
       textStyle: BtnStyle.text600Size24(),
       onPressed: () {
-        print("Đăng nhập thành công");
+        AppPrompt.showAlertDialog(context);
       },
     );
   }
