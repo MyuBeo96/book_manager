@@ -1,5 +1,4 @@
 // Flutter imports:
-import 'package:book_manager/shared/util.dart';
 import 'package:flutter/material.dart';
 // Package imports:
 // Project imports:
@@ -8,11 +7,31 @@ class ApplicationBar extends StatelessWidget {
   final List<String> listTitle;
   final int currentStep;
   final double? width;
+  final Color textColorActive;
+  final Color textColor;
+  final Color currentStepActiveColor;
+  final Color currentStepColor;
+  final Color titleColorActive;
+  final Color titleColor;
+  final Color boxCricleColorActive;
+  final Color boxCricleColor;
+  final double? textSize;
+  final double? titleSize;
 
   const ApplicationBar({
     this.currentStep = 0,
     required this.listTitle,
     this.width,
+    this.textColorActive = const Color(0xFFFFFFFF),
+    this.textColor = const Color(0xFF8E8E93),
+    this.currentStepActiveColor = const Color(0xFFEB0D1E),
+    this.currentStepColor = const Color(0xFFE5E5EA),
+    this.titleColorActive = const Color(0xFFEB0D1E),
+    this.titleColor = const Color(0xFF636366),
+    this.boxCricleColorActive = const Color(0xFFEB0D1E),
+    this.boxCricleColor = const Color(0xFFF7F7FC),
+    this.textSize = 12.0,
+    this.titleSize = 10.0,
   });
 
   List<Widget> generateStepRow(
@@ -23,16 +42,16 @@ class ApplicationBar extends StatelessWidget {
     List<Widget> listDesired = [];
 
     final completedStepDecor = BoxDecoration(
-      color: Color(0xFFEB0D1E),
+      color: currentStepActiveColor,
       shape: BoxShape.circle,
       border: Border.all(
         width: 3.0,
-        color: Color(0xFFEB0D1E),
+        color: boxCricleColorActive,
       ),
     );
 
     final remainingStepDecor = BoxDecoration(
-      color: Color(0xFFF7F7FC),
+      color: boxCricleColor,
       shape: BoxShape.circle,
     );
     for (int i = 0; i < listTitle.length; i++) {
@@ -47,26 +66,18 @@ class ApplicationBar extends StatelessWidget {
         Expanded(
           child: Column(
             mainAxisSize: MainAxisSize.max,
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  (i == 0)
-                      ? Container(
-                          width: ((screenWidth / listTitle.length) / 2) - 20.0,
-                        )
-                      : Container(
-                          width: ((screenWidth / listTitle.length) / 2) - 20.0,
-                          height: 1.0,
-                          decoration: BoxDecoration(
-                            color: i < currentStep
-                                ? Color(0xFFEB0D1E)
-                                : Color(0xFFE5E5EA),
-                          ),
-                        ),
+                  _dashWidget(
+                      i: i,
+                      index: 0,
+                      screenWidth: screenWidth,
+                      currentStep: currentStep),
                   SizedBox(
                     width: 8.0,
                   ),
@@ -78,47 +89,31 @@ class ApplicationBar extends StatelessWidget {
                     child: Text(
                       '${i + 1}',
                       style: TextStyle(
-                        fontSize: 14.0,
-                        fontWeight: FontWeight.w500,
-                        color: i < currentStep
-                            ? Color(0xFFFFFFFF)
-                            : Color(0xFF8E8E93),
+                        fontSize: textSize,
+                        color: i < currentStep ? textColorActive : textColor,
                       ),
                     ),
                   ),
                   SizedBox(
                     width: 8.0,
                   ),
-                  (i == (listTitle.length - 1))
-                      ? Container(
-                          width: ((screenWidth / listTitle.length) / 2) - 20.0,
-                        )
-                      : Container(
-                          width: ((screenWidth / listTitle.length) / 2) - 20.0,
-                          height: 1.0,
-                          decoration: BoxDecoration(
-                            color: i < (currentStep - 1)
-                                ? Color(0xFFEB0D1E)
-                                : Color(0xFFE5E5EA),
-                          ),
-                        ),
+                  _dashWidget(
+                      i: i,
+                      index: listTitle.length - 1,
+                      screenWidth: screenWidth,
+                      currentStep: currentStep - 1),
                 ],
               ),
               SizedBox(
                 height: 4.0,
               ),
-              Container(
-                height: 40.0,
-                child: Text(
-                  listTitle[i],
-                  style: TextStyle(
-                    fontSize: dimen_16,
-                    fontWeight: FontWeight.w400,
-                    color: i < currentStep ? Color(0xFFEB0D1E) : Colors.black,
-                  ),
-                  textAlign: TextAlign.center,
-                  maxLines: 2,
+              Text(
+                listTitle[i],
+                style: TextStyle(
+                  fontSize: titleSize,
+                  color: i < currentStep ? titleColorActive : titleColor,
                 ),
+                textAlign: TextAlign.center,
               ),
             ],
           ),
@@ -128,21 +123,45 @@ class ApplicationBar extends StatelessWidget {
     return listDesired;
   }
 
+  Widget _dashWidget({
+    required int i,
+    required int index,
+    required double screenWidth,
+    required int currentStep,
+  }) {
+    return (i == index)
+        ? Container(
+            width: (screenWidth / (listTitle.length * 2)) - 20.0,
+          )
+        : Container(
+            width: (screenWidth / (listTitle.length * 2)) - 20.0,
+            height: 1.0,
+            decoration: BoxDecoration(
+              color:
+                  i < currentStep ? currentStepActiveColor : currentStepColor,
+            ),
+          );
+  }
+
   @override
   Widget build(BuildContext context) {
-    double _screenWith = width ?? MediaQuery.of(context).size.width;
-    return Container(
-      padding: EdgeInsets.only(
-        top: 20.0,
-      ),
-      color: Color(0x00FFFFFF),
-      child: Row(
-        children: generateStepRow(
-          listTitle,
-          currentStep,
-          _screenWith,
-        ),
-      ),
+    return LayoutBuilder(
+      builder: (BuildContext context, BoxConstraints constraints) {
+        double _screenWith = width ?? constraints.maxWidth;
+        return Container(
+          width: _screenWith,
+          child: Row(
+            mainAxisSize: MainAxisSize.max,
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: generateStepRow(
+              listTitle,
+              currentStep,
+              _screenWith,
+            ),
+          ),
+        );
+      },
     );
   }
 }
