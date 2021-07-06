@@ -428,7 +428,8 @@ class _LoginScreenState extends State<LoginScreen> {
       text: 'LOGIN',
       textStyle: BtnStyle.text600Size24(),
       onPressed: () {
-        AppPrompt.showAlertDialog(context);
+        // AppPrompt.showAlertDialog(context);
+        Navigator.pushReplacementNamed(context, RouteName.myMain);
       },
     );
   }

@@ -1,4 +1,6 @@
+import 'package:book_manager/module/home/home.dart';
 import 'package:book_manager/module/login/login.dart';
+import 'package:book_manager/module/main.dart';
 import 'package:flutter/material.dart';
 
 class AppRouteName {
@@ -6,6 +8,8 @@ class AppRouteName {
     return {
       RouteName.login: (context) => LoginScreen(),
       RouteName.signUp: (context) => SignUpScreen(),
+      RouteName.home: (context) => HomeScreen(),
+      RouteName.myMain: (context) => MyMain(),
     };
   }
 }
@@ -21,4 +25,6 @@ class CombinedRoutes {
 class RouteName {
   static final String login = '/login';
   static final String signUp = '/signUp';
+  static final String myMain = '/myMain';
+  static final String home = '/home';
 }
