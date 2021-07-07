@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:barcode_scan2/barcode_scan2.dart';
+import 'package:book_manager/shared/widget/mobile_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -42,185 +43,178 @@ class _ProfileScreenState extends State<ProfileScreen> {
   @override
   Widget build(BuildContext context) {
     final scanResult = this.scanResult;
-    return MaterialApp(
-      home: Scaffold(
-        appBar: AppBar(
-          title: const Text('Barcode Scanner Example'),
-          actions: [
-            IconButton(
-              icon: const Icon(Icons.camera),
-              tooltip: 'Scan',
-              onPressed: _scan,
-            )
-          ],
-        ),
-        body: ListView(
-          scrollDirection: Axis.vertical,
-          shrinkWrap: true,
-          children: <Widget>[
-            if (scanResult != null)
-              Card(
-                child: Column(
-                  children: <Widget>[
-                    ListTile(
-                      title: const Text('Result Type'),
-                      subtitle: Text(scanResult.type.toString()),
-                    ),
-                    ListTile(
-                      title: const Text('Raw Content'),
-                      subtitle: Text(scanResult.rawContent),
-                    ),
-                    ListTile(
-                      title: const Text('Format'),
-                      subtitle: Text(scanResult.format.toString()),
-                    ),
-                    ListTile(
-                      title: const Text('Format note'),
-                      subtitle: Text(scanResult.formatNote),
-                    ),
-                  ],
-                ),
+    return MobileScreen(
+      child: ListView(
+        scrollDirection: Axis.vertical,
+        shrinkWrap: true,
+        children: <Widget>[
+          IconButton(
+            icon: const Icon(Icons.camera),
+            tooltip: 'Scan',
+            onPressed: _scan,
+          ),
+          if (scanResult != null)
+            Card(
+              child: Column(
+                children: <Widget>[
+                  ListTile(
+                    title: const Text('Result Type'),
+                    subtitle: Text(scanResult.type.toString()),
+                  ),
+                  ListTile(
+                    title: const Text('Raw Content'),
+                    subtitle: Text(scanResult.rawContent),
+                  ),
+                  ListTile(
+                    title: const Text('Format'),
+                    subtitle: Text(scanResult.format.toString()),
+                  ),
+                  ListTile(
+                    title: const Text('Format note'),
+                    subtitle: Text(scanResult.formatNote),
+                  ),
+                ],
               ),
-            const ListTile(
-              title: Text('Camera selection'),
-              dense: true,
-              enabled: false,
             ),
-            RadioListTile(
-              onChanged: (v) => setState(() => _selectedCamera = -1),
-              value: -1,
-              title: const Text('Default camera'),
+          const ListTile(
+            title: Text('Camera selection'),
+            dense: true,
+            enabled: false,
+          ),
+          RadioListTile(
+            onChanged: (v) => setState(() => _selectedCamera = -1),
+            value: -1,
+            title: const Text('Default camera'),
+            groupValue: _selectedCamera,
+          ),
+          ...List.generate(
+            _numberOfCameras,
+            (i) => RadioListTile(
+              onChanged: (v) => setState(() => _selectedCamera = i),
+              value: i,
+              title: Text('Camera ${i + 1}'),
               groupValue: _selectedCamera,
             ),
-            ...List.generate(
-              _numberOfCameras,
-              (i) => RadioListTile(
-                onChanged: (v) => setState(() => _selectedCamera = i),
-                value: i,
-                title: Text('Camera ${i + 1}'),
-                groupValue: _selectedCamera,
+          ),
+          const ListTile(
+            title: Text('Button Texts'),
+            dense: true,
+            enabled: false,
+          ),
+          ListTile(
+            title: TextField(
+              decoration: const InputDecoration(
+                floatingLabelBehavior: FloatingLabelBehavior.always,
+                labelText: 'Flash On',
               ),
+              controller: _flashOnController,
             ),
+          ),
+          ListTile(
+            title: TextField(
+              decoration: const InputDecoration(
+                floatingLabelBehavior: FloatingLabelBehavior.always,
+                labelText: 'Flash Off',
+              ),
+              controller: _flashOffController,
+            ),
+          ),
+          ListTile(
+            title: TextField(
+              decoration: const InputDecoration(
+                floatingLabelBehavior: FloatingLabelBehavior.always,
+                labelText: 'Cancel',
+              ),
+              controller: _cancelController,
+            ),
+          ),
+          if (Platform.isAndroid) ...[
             const ListTile(
-              title: Text('Button Texts'),
+              title: Text('Android specific options'),
               dense: true,
               enabled: false,
             ),
             ListTile(
-              title: TextField(
-                decoration: const InputDecoration(
-                  floatingLabelBehavior: FloatingLabelBehavior.always,
-                  labelText: 'Flash On',
-                ),
-                controller: _flashOnController,
+              title: Text(
+                'Aspect tolerance (${_aspectTolerance.toStringAsFixed(2)})',
               ),
-            ),
-            ListTile(
-              title: TextField(
-                decoration: const InputDecoration(
-                  floatingLabelBehavior: FloatingLabelBehavior.always,
-                  labelText: 'Flash Off',
-                ),
-                controller: _flashOffController,
-              ),
-            ),
-            ListTile(
-              title: TextField(
-                decoration: const InputDecoration(
-                  floatingLabelBehavior: FloatingLabelBehavior.always,
-                  labelText: 'Cancel',
-                ),
-                controller: _cancelController,
-              ),
-            ),
-            if (Platform.isAndroid) ...[
-              const ListTile(
-                title: Text('Android specific options'),
-                dense: true,
-                enabled: false,
-              ),
-              ListTile(
-                title: Text(
-                  'Aspect tolerance (${_aspectTolerance.toStringAsFixed(2)})',
-                ),
-                subtitle: Slider(
-                  min: -1,
-                  max: 1,
-                  value: _aspectTolerance,
-                  onChanged: (value) {
-                    setState(() {
-                      _aspectTolerance = value;
-                    });
-                  },
-                ),
-              ),
-              CheckboxListTile(
-                title: const Text('Use autofocus'),
-                value: _useAutoFocus,
-                onChanged: (checked) {
+              subtitle: Slider(
+                min: -1,
+                max: 1,
+                value: _aspectTolerance,
+                onChanged: (value) {
                   setState(() {
-                    _useAutoFocus = checked!;
+                    _aspectTolerance = value;
                   });
                 },
               ),
-            ],
-            const ListTile(
-              title: Text('Other options'),
-              dense: true,
-              enabled: false,
             ),
             CheckboxListTile(
-              title: const Text('Start with flash'),
-              value: _autoEnableFlash,
+              title: const Text('Use autofocus'),
+              value: _useAutoFocus,
               onChanged: (checked) {
                 setState(() {
-                  _autoEnableFlash = checked!;
+                  _useAutoFocus = checked!;
                 });
               },
             ),
-            const ListTile(
-              title: Text('Barcode formats'),
-              dense: true,
-              enabled: false,
-            ),
-            ListTile(
-              trailing: Checkbox(
-                tristate: true,
-                materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                value: selectedFormats.length == _possibleFormats.length
-                    ? true
-                    : selectedFormats.isEmpty
-                        ? false
-                        : null,
-                onChanged: (checked) {
-                  setState(() {
-                    selectedFormats = [
-                      if (checked ?? false) ..._possibleFormats,
-                    ];
-                  });
-                },
-              ),
-              dense: true,
-              enabled: false,
-              title: const Text('Detect barcode formats'),
-              subtitle: const Text(
-                'If all are unselected, all possible '
-                'platform formats will be used',
-              ),
-            ),
-            ..._possibleFormats.map(
-              (format) => CheckboxListTile(
-                value: selectedFormats.contains(format),
-                onChanged: (i) {
-                  setState(() => selectedFormats.contains(format)
-                      ? selectedFormats.remove(format)
-                      : selectedFormats.add(format));
-                },
-                title: Text(format.toString()),
-              ),
-            ),
           ],
-        ),
+          const ListTile(
+            title: Text('Other options'),
+            dense: true,
+            enabled: false,
+          ),
+          CheckboxListTile(
+            title: const Text('Start with flash'),
+            value: _autoEnableFlash,
+            onChanged: (checked) {
+              setState(() {
+                _autoEnableFlash = checked!;
+              });
+            },
+          ),
+          const ListTile(
+            title: Text('Barcode formats'),
+            dense: true,
+            enabled: false,
+          ),
+          ListTile(
+            trailing: Checkbox(
+              tristate: true,
+              materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+              value: selectedFormats.length == _possibleFormats.length
+                  ? true
+                  : selectedFormats.isEmpty
+                      ? false
+                      : null,
+              onChanged: (checked) {
+                setState(() {
+                  selectedFormats = [
+                    if (checked ?? false) ..._possibleFormats,
+                  ];
+                });
+              },
+            ),
+            dense: true,
+            enabled: false,
+            title: const Text('Detect barcode formats'),
+            subtitle: const Text(
+              'If all are unselected, all possible '
+              'platform formats will be used',
+            ),
+          ),
+          ..._possibleFormats.map(
+            (format) => CheckboxListTile(
+              value: selectedFormats.contains(format),
+              onChanged: (i) {
+                setState(() => selectedFormats.contains(format)
+                    ? selectedFormats.remove(format)
+                    : selectedFormats.add(format));
+              },
+              title: Text(format.toString()),
+            ),
+          ),
+        ],
       ),
     );
   }

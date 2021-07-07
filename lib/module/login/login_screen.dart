@@ -136,7 +136,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
-    // GoogleSignInAccount? user = _currentUser;
+    GoogleSignInAccount? user = _currentUser;
     final availableHeight = MediaQuery.of(context).padding.bottom;
     return Scaffold(
       body: Stack(
@@ -145,11 +145,11 @@ class _LoginScreenState extends State<LoginScreen> {
             decoration: BoxDecoration(
               color: AppColor.backgroundColor,
             ),
-            // padding: const EdgeInsets.all(dimen_50),
-            padding: const EdgeInsets.only(top: dimen_50),
+            padding: const EdgeInsets.all(dimen_32),
+            // padding: const EdgeInsets.only(top: dimen_50),
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
                 // CountDown(
                 //   duration: Duration(
@@ -159,57 +159,57 @@ class _LoginScreenState extends State<LoginScreen> {
                 //     milliseconds: 999,
                 //   ),
                 // ),
-                // user != null
-                //     ? ListTile(
-                //         leading: GoogleUserCircleAvatar(
-                //           identity: user,
-                //         ),
-                //         title: Text(user.displayName ?? ''),
-                //         subtitle: Text(user.email),
-                //       )
-                //     : Container(),
-                // Container(
-                //   margin: const EdgeInsets.all(dimen_50),
-                //   width: dimen_200,
-                //   height: dimen_200,
-                //   decoration: BoxDecoration(
-                //     shape: BoxShape.circle,
-                //     image: DecorationImage(
-                //       image: AssetImage(PathConstant.logoAppPath),
-                //     ),
-                //   ),
+                user != null
+                    ? ListTile(
+                        leading: GoogleUserCircleAvatar(
+                          identity: user,
+                        ),
+                        title: Text(user.displayName ?? ''),
+                        subtitle: Text(user.email),
+                      )
+                    : Container(),
+                Container(
+                  margin: const EdgeInsets.all(dimen_50),
+                  width: dimen_200,
+                  height: dimen_200,
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    image: DecorationImage(
+                      image: AssetImage(PathConstant.logoAppPath),
+                    ),
+                  ),
+                ),
+                // ApplicationBar(
+                //   // width: 300,
+                //   currentStep: 2,
+                //   listTitle: [
+                //     "Thông tin cá nhân",
+                //     "Xác nhận ",
+                //     "Thông tin tài chính",
+                //     "Hoàn thành",
+                //   ],
                 // ),
-                ApplicationBar(
-                  // width: 300,
-                  currentStep: 2,
-                  listTitle: [
-                    "Thông tin cá nhân",
-                    "Xác nhận ",
-                    "Thông tin tài chính",
-                    "Hoàn thành",
-                  ],
-                ),
-                VietlottRadioListTile(
-                  scrollDirection: Axis.horizontal,
-                  // textOverflow: TextOverflow.ellipsis,
-                  textStyle: TxtStyle.textBlue(),
-                  itemExtent: 130,
-                  // horizontalTitleGap: 100.0,
-                  // isDisable: true,
-                  listRadio: [
-                    // 'Vũ Diệu Linh',
-                    'Nam',
-                    ' Nữ',
-                    // 'Android',
-                    // 'Swift',
-                    // 'Kotlin',
-                    // 'React Native',
-                  ],
-                  groupValue: groupValue,
-                  onChanged: (value) {
-                    print('linhhhhhh ' + value.toString());
-                  },
-                ),
+                // VietlottRadioListTile(
+                //   scrollDirection: Axis.horizontal,
+                //   // textOverflow: TextOverflow.ellipsis,
+                //   textStyle: TxtStyle.textBlue(),
+                //   itemExtent: 130,
+                //   // horizontalTitleGap: 100.0,
+                //   // isDisable: true,
+                //   listRadio: [
+                //     // 'Vũ Diệu Linh',
+                //     'Nam',
+                //     ' Nữ',
+                //     // 'Android',
+                //     // 'Swift',
+                //     // 'Kotlin',
+                //     // 'React Native',
+                //   ],
+                //   groupValue: groupValue,
+                //   onChanged: (value) {
+                //     print('linhhhhhh ' + value.toString());
+                //   },
+                // ),
 
                 // StreamBuilder(
                 //     stream: valueStream,

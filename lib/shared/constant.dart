@@ -13,6 +13,7 @@ class PathConstant {
   static final dropdownIconPath = baseSvgPath + 'ic_dropdown.svg';
   static final eyeHidePassword = baseSvgPath + 'eye_hide_password.svg';
   static final eyeShowPassword = baseSvgPath + 'eye_show_password.svg';
+  static final closeIcon = baseSvgPath + 'ic_close.svg';
 
   //---PNG
   static final logoAppPath = basePngPath + 'logo_app.png';

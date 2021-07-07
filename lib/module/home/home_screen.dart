@@ -1,4 +1,5 @@
 import 'package:book_manager/module/theme/theme_manager.dart';
+import 'package:book_manager/shared/util.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -37,6 +38,15 @@ class _HomeScreenState extends State<HomeScreen> {
                     theme.setDarkMode(),
                   },
                   child: Text('Set Dark theme'),
+                ),
+              ),
+              Container(
+                // ignore: deprecated_member_use
+                child: FlatButton(
+                  onPressed: () {
+                    Navigator.popAndPushNamed(context, RouteName.camera);
+                  },
+                  child: Text('Camera'),
                 ),
               ),
             ],
