@@ -1,4 +1,9 @@
 {
     "login_account": "Nhập email",
-    "login_password": "Nhập password"
+    "login_password": "Nhập password",
+    "login_forget_password": "Quên mật khẩu?",
+    "login_login": "Đăng nhập",
+    "login_connect_using":"Hoặc đăng nhập bằng",
+    "login_dont_account": "Bạn chưa có tài khoản?",
+    "login_singup":"Đăng ký"
 }

@@ -1,5 +1,5 @@
 import 'package:book_manager/module/home/home.dart';
-import 'package:book_manager/module/login/login.dart';
+import 'package:book_manager/module/auth/login.dart';
 import 'package:book_manager/module/main.dart';
 import 'package:book_manager/shared/widget/camera_screen.dart';
 import 'package:flutter/material.dart';

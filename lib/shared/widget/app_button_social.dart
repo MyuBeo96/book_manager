@@ -1,4 +1,5 @@
 import 'package:book_manager/shared/util.dart';
+import 'package:flustars/flustars.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
@@ -27,12 +28,13 @@ class _AppButtonSocialState extends State<AppButtonSocial> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.all(dimen_10),
+      padding: EdgeInsets.all(ScreenUtil.getInstance().getWidth(dimen_08)),
       width: MediaQuery.of(context).size.width / 3,
       decoration: BoxDecoration(
         shape: BoxShape.rectangle,
         color: widget.backgroundColor,
-        borderRadius: BorderRadius.circular(dimen_08),
+        borderRadius:
+            BorderRadius.circular(ScreenUtil.getInstance().getWidth(dimen_08)),
       ),
       child: InkWell(
         onTap: widget.onPressed,
@@ -40,12 +42,12 @@ class _AppButtonSocialState extends State<AppButtonSocial> {
           children: [
             SvgPicture.asset(
               widget.pathIcon,
-              width: dimen_24,
-              height: dimen_24,
+              width: ScreenUtil.getInstance().getWidth(dimen_24),
+              height: ScreenUtil.getInstance().getWidth(dimen_24),
               color: AppColor.white,
             ),
             SizedBox(
-              width: dimen_16,
+              width: ScreenUtil.getInstance().getWidth(dimen_08),
             ),
             Container(
               alignment: Alignment.center,

@@ -1,4 +1,5 @@
 import 'package:book_manager/shared/util.dart';
+import 'package:flustars/flustars.dart';
 import 'package:flutter/material.dart';
 
 class AppButton extends StatefulWidget {
@@ -22,12 +23,13 @@ class _AppButtonState extends State<AppButton> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.all(dimen_16),
+      padding: EdgeInsets.all(ScreenUtil.getInstance().getWidth(dimen_16)),
       width: MediaQuery.of(context).size.width / 2,
       decoration: BoxDecoration(
         shape: BoxShape.rectangle,
         color: AppColor.systemColorBlue,
-        borderRadius: BorderRadius.circular(dimen_50),
+        borderRadius:
+            BorderRadius.circular(ScreenUtil.getInstance().getWidth(dimen_50)),
       ),
       child: InkWell(
         onTap: widget.onPressed,

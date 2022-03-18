@@ -26,15 +26,15 @@ class ThemeNotifier with ChangeNotifier {
   ThemeData getTheme() => _themeData!;
 
   ThemeNotifier() {
-    SPref.readData('themeMode').then((value) {
-      var themeMode = value ?? 'light';
-      if (themeMode == 'light') {
-        _themeData = lightTheme;
-      } else {
-        _themeData = darkTheme;
-      }
-      notifyListeners();
-    });
+    // SPref.readData('themeMode').then((value) {
+    //   var themeMode = value ?? 'light';
+    //   if (themeMode == 'light') {
+    //     _themeData = lightTheme;
+    //   } else {
+    //     _themeData = darkTheme;
+    //   }
+    //   notifyListeners();
+    // });
   }
 
   void setDarkMode() async {

@@ -1,4 +1,9 @@
 {
-    "login_account": "Nhập email",
-    "login_password": "Nhập password"
+    "login_account": "Email",
+    "login_password": "Password",
+    "login_forget_password": "Forget Password?",
+    "login_login": "Login",
+    "login_connect_using":"Or connect using",
+    "login_dont_account": "Don't have an account?",
+    "login_singup":"Sign Up"
 }

@@ -17,6 +17,8 @@ class PathConstant {
 
   //---PNG
   static final logoAppPath = basePngPath + 'logo_app.png';
+  static final languageEnPath = basePngPath + 'language_en.png';
+  static final languageViPath = basePngPath + 'language_vi.png';
 }
 
 class SPrefCache {

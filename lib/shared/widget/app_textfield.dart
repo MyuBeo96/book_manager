@@ -1,4 +1,5 @@
 import 'package:book_manager/shared/util.dart';
+import 'package:flustars/flustars.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
@@ -44,28 +45,31 @@ class _AppTextFieldState extends State<AppTextField> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: dimen_16),
+      padding: EdgeInsets.symmetric(
+          horizontal: ScreenUtil.getInstance().getWidth(dimen_16)),
       decoration: BoxDecoration(
         shape: BoxShape.rectangle,
         color: AppColor.white,
         border: Border.all(
-          width: dimen_02,
+          width: ScreenUtil.getInstance().getWidth(dimen_02),
           // ignore: unnecessary_null_comparison
           color: _setColor(),
         ),
-        borderRadius: BorderRadius.circular(dimen_50),
+        borderRadius:
+            BorderRadius.circular(ScreenUtil.getInstance().getWidth(dimen_50)),
       ),
       child: Row(
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           SvgPicture.asset(
             widget.pathIcon,
-            width: dimen_16,
-            height: dimen_16,
+            width: ScreenUtil.getInstance().getWidth(dimen_16),
+            height: ScreenUtil.getInstance().getWidth(dimen_16),
             // ignore: unnecessary_null_comparison
             color: _setColor(),
           ),
           SizedBox(
-            width: dimen_16,
+            width: ScreenUtil.getInstance().getWidth(dimen_08),
           ),
           Expanded(
             child: Container(
@@ -75,10 +79,7 @@ class _AppTextFieldState extends State<AppTextField> {
                 onTap: widget.onTap,
                 decoration: InputDecoration(
                   hintText: widget.textHint,
-                  hintStyle: TextStyle(
-                    fontSize: dimen_16,
-                    color: AppColor.grey,
-                  ),
+                  hintStyle: TxtStyle.text400Size16Grey(),
                   border: InputBorder.none,
                 ),
                 keyboardType: TextInputType.text,

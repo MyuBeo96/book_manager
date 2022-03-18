@@ -50,21 +50,71 @@ class S {
     return Localizations.of<S>(context, S);
   }
 
-  /// `Nhập email`
+  /// `Email`
   String get login_account {
     return Intl.message(
-      'Nhập email',
+      'Email',
       name: 'login_account',
       desc: '',
       args: [],
     );
   }
 
-  /// `Nhập password`
+  /// `Password`
   String get login_password {
     return Intl.message(
-      'Nhập password',
+      'Password',
       name: 'login_password',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Forget Password?`
+  String get login_forget_password {
+    return Intl.message(
+      'Forget Password?',
+      name: 'login_forget_password',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Login`
+  String get login_login {
+    return Intl.message(
+      'Login',
+      name: 'login_login',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Or connect using`
+  String get login_connect_using {
+    return Intl.message(
+      'Or connect using',
+      name: 'login_connect_using',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Don't have an account?`
+  String get login_dont_account {
+    return Intl.message(
+      'Don\'t have an account?',
+      name: 'login_dont_account',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Sign Up`
+  String get login_singup {
+    return Intl.message(
+      'Sign Up',
+      name: 'login_singup',
       desc: '',
       args: [],
     );

@@ -11,9 +11,12 @@ const dimen_14 = 14.0;
 const dimen_16 = 16.0;
 const dimen_20 = 20.0;
 const dimen_24 = 24.0;
+const dimen_30 = 30.0;
 const dimen_32 = 32.0;
 const dimen_50 = 50.0;
 const dimen_100 = 100.0;
+const dimen_150 = 150.0;
+const dimen_180 = 180.0;
 const dimen_200 = 200.0;
 
 //text_font_size
