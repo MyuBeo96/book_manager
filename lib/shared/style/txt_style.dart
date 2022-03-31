@@ -99,4 +99,12 @@ class TxtStyle {
       fontWeight: FontWeight.w400,
     );
   }
+
+  static TextStyle text600Size16Black() {
+    return TextStyle(
+      fontSize: ScreenUtil.getInstance().getSp(dimen_16),
+      color: AppColor.back,
+      fontWeight: FontWeight.w600,
+    );
+  }
 }

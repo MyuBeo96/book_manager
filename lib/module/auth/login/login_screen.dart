@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:convert' show json;
 import 'package:book_manager/main.dart';
+import 'package:book_manager/shared/validate/validate.dart';
 import 'package:book_manager/shared/widget/widgets.dart';
 import 'package:book_manager/shared/util.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -128,10 +129,10 @@ class _LoginScreenState extends State<LoginScreen> {
 
   var _valueController = StreamController<String>();
   Stream<String> get valueStream => _valueController.stream;
+  GlobalKey<FormState> _formkey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
-    GoogleSignInAccount? user = _currentUser;
     return Scaffold(
       body: Container(
         constraints: BoxConstraints.expand(),
@@ -139,125 +140,152 @@ class _LoginScreenState extends State<LoginScreen> {
           color: AppColor.backgroundColor,
         ),
         child: SingleChildScrollView(
-          child: Column(
-            children: [
-              Container(
-                padding: EdgeInsets.only(
-                  top: MediaQuery.of(context).viewPadding.top,
-                  right: ScreenUtil.getInstance().getWidth(dimen_16),
-                ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    InkWell(
-                      onTap: () => MyApp.of(context)
-                          .setLocale(Locale.fromSubtags(languageCode: 'vi')),
-                      child: Image.asset(
-                        PathConstant.languageViPath,
-                        width: ScreenUtil.getInstance().getWidth(dimen_24),
-                        height: ScreenUtil.getInstance().getWidth(dimen_24),
-                      ),
-                    ),
-                    SizedBox(
-                      width: ScreenUtil.getInstance().getWidth(dimen_08),
-                    ),
-                    InkWell(
-                      onTap: () => MyApp.of(context)
-                          .setLocale(Locale.fromSubtags(languageCode: 'en')),
-                      child: Image.asset(
-                        PathConstant.languageEnPath,
-                        width: ScreenUtil.getInstance().getWidth(dimen_24),
-                        height: ScreenUtil.getInstance().getWidth(dimen_24),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              Container(
-                padding: EdgeInsets.symmetric(
-                    horizontal: ScreenUtil.getInstance().getWidth(dimen_16)),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: <Widget>[
-                    user != null
-                        ? ListTile(
-                            leading: GoogleUserCircleAvatar(
-                              identity: user,
+          child: Form(
+            key: _formkey,
+            child: Container(
+              height: ScreenUtil.getInstance().screenHeight,
+              child: Stack(
+                children: [
+                  Column(
+                    children: [
+                      Container(
+                        padding: EdgeInsets.only(
+                          top: MediaQuery.of(context).viewPadding.top,
+                          right: ScreenUtil.getInstance().getWidth(dimen_16),
+                        ),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            InkWell(
+                              onTap: () => MyApp.of(context).setLocale(
+                                  Locale.fromSubtags(languageCode: 'vi')),
+                              child: Image.asset(
+                                PathConstant.languageViPath,
+                                width:
+                                    ScreenUtil.getInstance().getWidth(dimen_24),
+                                height:
+                                    ScreenUtil.getInstance().getWidth(dimen_24),
+                              ),
                             ),
-                            title: Text(user.displayName ?? ''),
-                            subtitle: Text(user.email),
-                          )
-                        : Container(),
-                    Container(
-                      margin: EdgeInsets.all(
-                          ScreenUtil.getInstance().getWidth(dimen_30)),
-                      width: ScreenUtil.getInstance().getWidth(dimen_200),
-                      height: ScreenUtil.getInstance().getWidth(dimen_200),
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        image: DecorationImage(
-                          image: AssetImage(PathConstant.logoAppPath),
+                            SizedBox(
+                              width:
+                                  ScreenUtil.getInstance().getWidth(dimen_08),
+                            ),
+                            InkWell(
+                              onTap: () => MyApp.of(context).setLocale(
+                                  Locale.fromSubtags(languageCode: 'en')),
+                              child: Image.asset(
+                                PathConstant.languageEnPath,
+                                width:
+                                    ScreenUtil.getInstance().getWidth(dimen_24),
+                                height:
+                                    ScreenUtil.getInstance().getWidth(dimen_24),
+                              ),
+                            ),
+                          ],
                         ),
                       ),
+                      Container(
+                        padding: EdgeInsets.symmetric(
+                            horizontal:
+                                ScreenUtil.getInstance().getWidth(dimen_16)),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: <Widget>[
+                            // user != null
+                            //     ? ListTile(
+                            //         leading: GoogleUserCircleAvatar(
+                            //           identity: user,
+                            //         ),
+                            //         title: Text(user.displayName ?? ''),
+                            //         subtitle: Text(user.email),
+                            //       )
+                            //     : Container(),
+                            Container(
+                              margin: EdgeInsets.all(
+                                  ScreenUtil.getInstance().getWidth(dimen_30)),
+                              width:
+                                  ScreenUtil.getInstance().getWidth(dimen_200),
+                              height:
+                                  ScreenUtil.getInstance().getWidth(dimen_200),
+                              decoration: BoxDecoration(
+                                shape: BoxShape.circle,
+                                image: DecorationImage(
+                                  image: AssetImage(PathConstant.logoAppPath),
+                                ),
+                              ),
+                            ),
+                            _textFieldUser(),
+                            SizedBox(
+                              height:
+                                  ScreenUtil.getInstance().getWidth(dimen_16),
+                            ),
+                            _textFieldPassword(),
+                            SizedBox(
+                              height:
+                                  ScreenUtil.getInstance().getWidth(dimen_16),
+                            ),
+                            _textForgotPassword(),
+                            SizedBox(
+                              height:
+                                  ScreenUtil.getInstance().getWidth(dimen_16),
+                            ),
+                            _buttonLogin(),
+                            SizedBox(
+                              height:
+                                  ScreenUtil.getInstance().getWidth(dimen_16),
+                            ),
+                            Text(
+                              AppLocalizations.of(context)!.login_connect_using,
+                              style: TxtStyle.text400Size16Black(),
+                            ),
+                            SizedBox(
+                              height:
+                                  ScreenUtil.getInstance().getWidth(dimen_16),
+                            ),
+                            _buttonSocial(),
+                            SizedBox(
+                              height:
+                                  ScreenUtil.getInstance().getWidth(dimen_16),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                  Positioned(
+                    bottom: ScreenUtil.getInstance().getWidth(dimen_00),
+                    child: Container(
+                      padding: EdgeInsets.symmetric(
+                          vertical: MediaQuery.of(context).padding.bottom),
+                      alignment: AlignmentDirectional.bottomCenter,
+                      width: MediaQuery.of(context).size.width,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            AppLocalizations.of(context)!.login_dont_account,
+                            style: TxtStyle.text400Size16Black(),
+                          ),
+                          SizedBox(
+                            width: ScreenUtil.getInstance().getWidth(dimen_08),
+                          ),
+                          AppTextLining(
+                            text: AppLocalizations.of(context)!.login_singup,
+                            textStyle: TxtStyle.text600Size16Blue(),
+                            onPressed: () {
+                              Navigator.pushReplacementNamed(
+                                  context, RouteName.signUp);
+                            },
+                          ),
+                        ],
+                      ),
                     ),
-                    _textFieldUser(),
-                    SizedBox(
-                      height: ScreenUtil.getInstance().getWidth(dimen_16),
-                    ),
-                    _textFieldPassword(),
-                    SizedBox(
-                      height: ScreenUtil.getInstance().getWidth(dimen_16),
-                    ),
-                    _textForgotPassword(),
-                    SizedBox(
-                      height: ScreenUtil.getInstance().getWidth(dimen_16),
-                    ),
-                    _buttonLogin(),
-                    SizedBox(
-                      height: ScreenUtil.getInstance().getWidth(dimen_16),
-                    ),
-                    Text(
-                      AppLocalizations.of(context)!.login_connect_using,
-                      style: TxtStyle.text400Size16Black(),
-                    ),
-                    SizedBox(
-                      height: ScreenUtil.getInstance().getWidth(dimen_16),
-                    ),
-                    _buttonSocial(),
-                    SizedBox(
-                      height: ScreenUtil.getInstance().getWidth(dimen_16),
-                    ),
-                  ],
-                ),
+                  ),
+                ],
               ),
-              Container(
-                padding: EdgeInsets.symmetric(
-                    vertical: ScreenUtil.getInstance().getWidth(dimen_16)),
-                alignment: AlignmentDirectional.bottomCenter,
-                width: MediaQuery.of(context).size.width,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      AppLocalizations.of(context)!.login_dont_account,
-                      style: TxtStyle.text400Size16Black(),
-                    ),
-                    SizedBox(
-                      width: ScreenUtil.getInstance().getWidth(dimen_08),
-                    ),
-                    AppTextLining(
-                      text: AppLocalizations.of(context)!.login_singup,
-                      textStyle: TxtStyle.text600Size16Blue(),
-                      onPressed: () {
-                        Navigator.pushReplacementNamed(
-                            context, RouteName.signUp);
-                      },
-                    ),
-                  ],
-                ),
-              ),
-            ],
+            ),
           ),
         ),
       ),
@@ -310,7 +338,15 @@ class _LoginScreenState extends State<LoginScreen> {
       text: AppLocalizations.of(context)!.login_login,
       textStyle: BtnStyle.text600Size20(),
       onPressed: () {
-        Navigator.pushReplacementNamed(context, RouteName.myMain);
+        if (CheckValidate().validateEmail(emailController.text)) {
+          Navigator.pushReplacementNamed(context, RouteName.myMain);
+        } else {
+          AlertDialogApp().showAlert(
+            context: context,
+            title: 'Thông báo',
+            description: 'Email không đúng định dạng',
+          );
+        }
       },
     );
   }
@@ -324,6 +360,7 @@ class _LoginScreenState extends State<LoginScreen> {
         children: [
           AppButtonSocial(
             text: 'Facebook',
+            width: ScreenUtil.getInstance().screenWidth / 2.9,
             textStyle: BtnStyle.normal(),
             pathIcon: PathConstant.facebookIconPath,
             backgroundColor: AppColor.systemColorBlue,
@@ -333,6 +370,7 @@ class _LoginScreenState extends State<LoginScreen> {
           ),
           AppButtonSocial(
             text: 'Google',
+            width: ScreenUtil.getInstance().screenWidth / 3,
             textStyle: BtnStyle.normal(),
             backgroundColor: AppColor.systemColorRed,
             pathIcon: PathConstant.googleIconPath,

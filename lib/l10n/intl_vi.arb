@@ -1,9 +1,17 @@
 {
-    "login_account": "Nhập email",
-    "login_password": "Nhập password",
+    "login_account": "Email",
+    "login_password": "Mẩt khẩu",
     "login_forget_password": "Quên mật khẩu?",
     "login_login": "Đăng nhập",
     "login_connect_using":"Hoặc đăng nhập bằng",
     "login_dont_account": "Bạn chưa có tài khoản?",
-    "login_singup":"Đăng ký"
+    "login_singup":"Đăng ký",
+    "signup_fullName": "Họ và tên",
+    "signup_email":"Email",
+    "signup_phone":"Số điện thoại",
+    "signup_pass":"Mật khẩu",
+    "singup_confirmPass":"Xác nhận mật khẩu",
+    "signup_create":"Đăng ký",
+    "signup_already_account":"Đã có tài khoản",
+    "sigup_login":"Đăng nhập"
 }

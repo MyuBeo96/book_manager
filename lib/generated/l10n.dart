@@ -119,6 +119,86 @@ class S {
       args: [],
     );
   }
+
+  /// `Full name`
+  String get signup_fullName {
+    return Intl.message(
+      'Full name',
+      name: 'signup_fullName',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Email`
+  String get signup_email {
+    return Intl.message(
+      'Email',
+      name: 'signup_email',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Phone`
+  String get signup_phone {
+    return Intl.message(
+      'Phone',
+      name: 'signup_phone',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Password`
+  String get signup_pass {
+    return Intl.message(
+      'Password',
+      name: 'signup_pass',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Confirm password`
+  String get singup_confirmPass {
+    return Intl.message(
+      'Confirm password',
+      name: 'singup_confirmPass',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Sign Up`
+  String get signup_create {
+    return Intl.message(
+      'Sign Up',
+      name: 'signup_create',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Already have an account?`
+  String get signup_already_account {
+    return Intl.message(
+      'Already have an account?',
+      name: 'signup_already_account',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Login`
+  String get sigup_login {
+    return Intl.message(
+      'Login',
+      name: 'sigup_login',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

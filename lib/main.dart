@@ -36,6 +36,7 @@ class _MyAppState extends State<MyApp> {
     return Consumer<ThemeNotifier>(
       builder: (context, theme, _) => MaterialApp(
         home: LoginScreen(),
+        debugShowCheckedModeBanner: false,
         locale: _locale,
         localizationsDelegates: [
           AppLocalizations.delegate,

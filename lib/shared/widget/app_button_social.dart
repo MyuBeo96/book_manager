@@ -10,6 +10,7 @@ class AppButtonSocial extends StatefulWidget {
   final TextInputType textInputType;
   final TextStyle textStyle;
   final VoidCallback? onPressed;
+  final double? width;
 
   const AppButtonSocial({
     required this.text,
@@ -17,6 +18,7 @@ class AppButtonSocial extends StatefulWidget {
     required this.backgroundColor,
     required this.onPressed,
     required this.textStyle,
+    this.width = dimen_200,
     this.textInputType = TextInputType.text,
   });
 
@@ -29,7 +31,7 @@ class _AppButtonSocialState extends State<AppButtonSocial> {
   Widget build(BuildContext context) {
     return Container(
       padding: EdgeInsets.all(ScreenUtil.getInstance().getWidth(dimen_08)),
-      width: MediaQuery.of(context).size.width / 3,
+      width: widget.width,
       decoration: BoxDecoration(
         shape: BoxShape.rectangle,
         color: widget.backgroundColor,

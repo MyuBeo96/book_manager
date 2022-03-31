@@ -5,5 +5,13 @@
     "login_login": "Login",
     "login_connect_using":"Or connect using",
     "login_dont_account": "Don't have an account?",
-    "login_singup":"Sign Up"
+    "login_singup":"Sign Up",
+    "signup_fullName": "Full name",
+    "signup_email":"Email",
+    "signup_phone":"Phone",
+    "signup_pass":"Password",
+    "singup_confirmPass":"Confirm password",
+    "signup_create":"Sign Up",
+    "signup_already_account":"Already have an account?",
+    "sigup_login":"Login"
 }

@@ -11,6 +11,8 @@ class AppTextField extends StatefulWidget {
   final TextStyle textStyle;
   final bool isPassword;
   final GestureTapCallback? onTap;
+  final ValueChanged<String>? onChange;
+  final FormFieldValidator<String>? validator;
 
   const AppTextField({
     required this.controller,
@@ -18,6 +20,8 @@ class AppTextField extends StatefulWidget {
     required this.pathIcon,
     required this.textStyle,
     this.onTap,
+    this.onChange,
+    this.validator,
     this.textInputType = TextInputType.text,
     this.isPassword = false,
   });
@@ -77,11 +81,13 @@ class _AppTextFieldState extends State<AppTextField> {
                 controller: widget.controller,
                 focusNode: myFocusNode,
                 onTap: widget.onTap,
+                onChanged: widget.onChange,
                 decoration: InputDecoration(
                   hintText: widget.textHint,
                   hintStyle: TxtStyle.text400Size16Grey(),
                   border: InputBorder.none,
                 ),
+                validator: widget.validator,
                 keyboardType: TextInputType.text,
                 style: widget.textStyle,
                 maxLines: 1,

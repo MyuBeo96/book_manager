@@ -30,7 +30,7 @@ android {
 
     defaultConfig {
         // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
-        applicationId "com.dieulinh.book_manager"
+        applicationId "com.lynkmyu.bookManager"
         minSdkVersion 21
         targetSdkVersion 30
         versionCode flutterVersionCode.toInteger()
@@ -48,4 +48,8 @@ android {
 
 flutter {
     source '../..'
+}
+
+dependencies{
+    implementation 'com.facebook.android:facebook-android-sdk:[4,5)'
 }

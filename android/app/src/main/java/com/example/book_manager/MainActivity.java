@@ -1,4 +1,4 @@
-package com.dieulinh.book_manager;
+package com.lynkmyu.bookManager;
 
 import io.flutter.embedding.android.FlutterActivity;
 

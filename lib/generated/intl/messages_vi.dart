@@ -22,7 +22,7 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
-        "login_account": MessageLookupByLibrary.simpleMessage("Nhập email"),
+        "login_account": MessageLookupByLibrary.simpleMessage("Email"),
         "login_connect_using":
             MessageLookupByLibrary.simpleMessage("Hoặc đăng nhập bằng"),
         "login_dont_account":
@@ -30,7 +30,17 @@ class MessageLookup extends MessageLookupByLibrary {
         "login_forget_password":
             MessageLookupByLibrary.simpleMessage("Quên mật khẩu?"),
         "login_login": MessageLookupByLibrary.simpleMessage("Đăng nhập"),
-        "login_password": MessageLookupByLibrary.simpleMessage("Nhập password"),
-        "login_singup": MessageLookupByLibrary.simpleMessage("Đăng ký")
+        "login_password": MessageLookupByLibrary.simpleMessage("Mẩt khẩu"),
+        "login_singup": MessageLookupByLibrary.simpleMessage("Đăng ký"),
+        "signup_already_account":
+            MessageLookupByLibrary.simpleMessage("Đã có tài khoản"),
+        "signup_create": MessageLookupByLibrary.simpleMessage("Đăng ký"),
+        "signup_email": MessageLookupByLibrary.simpleMessage("Email"),
+        "signup_fullName": MessageLookupByLibrary.simpleMessage("Họ và tên"),
+        "signup_pass": MessageLookupByLibrary.simpleMessage("Mật khẩu"),
+        "signup_phone": MessageLookupByLibrary.simpleMessage("Số điện thoại"),
+        "sigup_login": MessageLookupByLibrary.simpleMessage("Đăng nhập"),
+        "singup_confirmPass":
+            MessageLookupByLibrary.simpleMessage("Xác nhận mật khẩu")
       };
 }
